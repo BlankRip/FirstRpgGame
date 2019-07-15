@@ -13,6 +13,7 @@ public class EnemyLoopMovement_NaveMesh : MonoBehaviour
     [SerializeField] Transform destinationPoint;                //Second Point where object wants to loop between
     [SerializeField] Transform player;                          // Player's position
     [SerializeField] float chasePlayerDistance;                 // How close the object should be to the player to make it chase the player
+    [SerializeField] bool usePlayerChase;                       // Enables the object to chase player if the coder requires it to
     bool changeTarget = false;
     bool chasePlayer = false;
 
@@ -27,7 +28,7 @@ public class EnemyLoopMovement_NaveMesh : MonoBehaviour
             changeTarget = true;
         }
 
-        if(Vector3.Distance(player.transform.position, transform.position) < chasePlayerDistance)
+        if(Vector3.Distance(player.transform.position, transform.position) < chasePlayerDistance && usePlayerChase)
         {
             chasePlayer = true;
         }
