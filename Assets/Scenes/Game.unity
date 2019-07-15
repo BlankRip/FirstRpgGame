@@ -344,7 +344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LayerMaskName: Ground
   speed: 5
-  usingNavMesh: 0
+  usingNavMesh: 1
   agent: {fileID: 1394403240}
 --- !u!195 &1394403240
 NavMeshAgent:
@@ -356,7 +356,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 6.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -604,6 +604,7 @@ MonoBehaviour:
   destinationPoint: {fileID: 1358373295}
   player: {fileID: 1394403238}
   chasePlayerDistance: 3
+  usePlayerChase: 1
 --- !u!195 &1904795149
 NavMeshAgent:
   m_ObjectHideFlags: 0
