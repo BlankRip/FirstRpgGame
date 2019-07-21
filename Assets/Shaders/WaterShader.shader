@@ -7,6 +7,7 @@
 		_Amount("The number of waves", float) = 1
 		_Hight("Wave Hight", float) = 2
 		_Transparancy("How transparent will the water be", Range(0, 1)) = 1
+		_TextureMoveSpeed("How fast the texture will move", float) = 0.2
     }
     SubShader
     {
@@ -43,15 +44,17 @@
 			float _Amount;
 			float _Hight;
 			float _Transparancy;
+			float _TextureMoveSpeed;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+				o.uv += sin(_Time.yz) * _TextureMoveSpeed;
 				float3 _WorldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
-				//o.vertex.y += sin(_Time.w * _Speed + (_WorldPos.x * _WorldPos.z * _Amount)) * _Hight;
-				o.vertex.y += sin(_Time.w * _Speed + (o.vertex.x * o.vertex.z * _Amount)) * _Hight;
+				o.vertex.y += sin(_Time.w * _Speed + (_WorldPos.x * _WorldPos.z * _Amount)) * _Hight;
+				//o.vertex.y += sin(_Time.w * _Speed + (o.vertex.x * o.vertex.z * _Amount)) * _Hight;
 
                 return o;
             }
