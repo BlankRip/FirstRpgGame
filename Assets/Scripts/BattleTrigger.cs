@@ -8,6 +8,9 @@ public class BattleTrigger : MonoBehaviour
     [SerializeField] GameObject battleArea;
     [SerializeField] Transform enemyBattlePosition;
     [SerializeField] GameObject enemyTypeToSpawn;
+    [SerializeField] BattleManager manager;
+
+
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Player")
@@ -16,6 +19,7 @@ public class BattleTrigger : MonoBehaviour
             theOverWorld.SetActive(false);
             battleArea.SetActive(true);
             Instantiate(enemyTypeToSpawn, enemyBattlePosition.position, Quaternion.identity);
+            manager.Start();
             Destroy(gameObject);
         }
     }
