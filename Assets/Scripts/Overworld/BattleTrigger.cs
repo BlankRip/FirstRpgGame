@@ -11,9 +11,9 @@ public class BattleTrigger : MonoBehaviour
     [SerializeField] BattleManager manager;
 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.tag == "Player")
+        if(other.tag== "Player")
         {
             transform.position = enemyBattlePosition.position;
             theOverWorld.SetActive(false);

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerBattler : MonoBehaviour
 {
     BattleManager manager;
+    [SerializeField] Animator animate;
 
     private void Start()
     {
@@ -14,6 +15,7 @@ public class PlayerBattler : MonoBehaviour
 
     public void Attack()
     {
+        //animate.SetBool("Attacking", true);
         print("<color=red> NOW ATTACKING </color>");
         manager.enemyTurn = true;
         manager.playerTurn = false;
