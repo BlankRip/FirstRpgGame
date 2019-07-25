@@ -18,7 +18,7 @@ public class BattleTrigger : MonoBehaviour
             transform.position = enemyBattlePosition.position;
             theOverWorld.SetActive(false);
             battleArea.SetActive(true);
-            Instantiate(enemyTypeToSpawn, enemyBattlePosition.position, Quaternion.identity);
+            Instantiate(enemyTypeToSpawn, enemyBattlePosition.position, enemyBattlePosition.rotation);
             manager.Start();
             Destroy(gameObject);
         }

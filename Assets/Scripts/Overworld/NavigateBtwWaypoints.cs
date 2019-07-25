@@ -10,6 +10,7 @@ public class NavigateBtwWaypoints : MonoBehaviour
     [SerializeField] float speed;                    // speed at whih the enmey moves
     int index = 0;                                   // which waypoint it is at or moving to right now
     float distance;                                  // distance between enemy and waypoint
+    [SerializeField] float switchWaypointAtDistance; // add to index when the distance between waypoints is less than this
     float distanceBtwPlayer;                         // distance between enemy and player
     Vector3 direction;                               // diretion to move in
     bool inverse;                                    // swith teh movement diretions
@@ -30,7 +31,7 @@ public class NavigateBtwWaypoints : MonoBehaviour
         {
             chasePlayer = true;
         }
-        else if(distanceBtwPlayer > followRange && chasePlayer)
+        else if(distanceBtwPlayer > followRange * 2 && chasePlayer)
         {
             chasePlayer = false;
             index = 0;
@@ -42,7 +43,7 @@ public class NavigateBtwWaypoints : MonoBehaviour
         if (!chasePlayer)
         {
             distance = Vector3.Distance(transform.position, waypoints[index].transform.position);
-            if (distance < 0.2f)
+            if (distance < switchWaypointAtDistance)
             {
                 if (!inverse)
                 {
