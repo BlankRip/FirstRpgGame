@@ -15,7 +15,6 @@ public class BattleTrigger : MonoBehaviour
     {
         if(other.tag== "Player")
         {
-            transform.position = enemyBattlePosition.position;
             theOverWorld.SetActive(false);
             battleArea.SetActive(true);
             Instantiate(enemyTypeToSpawn, enemyBattlePosition.position, enemyBattlePosition.rotation);

@@ -19,7 +19,10 @@ public class BattleAnimationManager : MonoBehaviour
     {
         if(manager.enemyTurn)
         {
-            //playerAnimator.SetBool("Attacking", false);
+            playerAnimator.SetBool("Attacking", false);
+            playerAnimator.SetBool("Defending", false);
+            playerAnimator.SetBool("Special", false);
+            print("did it");
         }
     }
 }

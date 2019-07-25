@@ -18,11 +18,12 @@ public class PlayerBattler : MonoBehaviour
         attackDamageCritical = attackDamageNormal * 1.5f;
         specialDamageCritical = specialDamageNormal * 1.5f;
         print("settings");
+        //var clip = animate.GetCurrentAnimatorClipInfo(0).Length;
     }
 
     public void Attack()
     {
-        //animate.SetBool("Attacking", true);
+        animate.SetBool("Attacking", true);
         hitChance = Random.Range(0, 10);
         if (hitChance < 7)
         {
@@ -43,6 +44,7 @@ public class PlayerBattler : MonoBehaviour
     }
     public void SpecialAttack()
     {
+        animate.SetBool("Special", true);
         hitChance = Random.Range(0, 10);
         if (hitChance <= 8 && hitChance >= 2)
         {
@@ -63,6 +65,7 @@ public class PlayerBattler : MonoBehaviour
     }
     public void Defence()
     {
+        animate.SetBool("Defending", true);
         manager.playerProtectionOn = true;
         manager.turnesProtected = 2;
         print("<color=green> NOW DEFENDING </color>");
