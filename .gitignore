@@ -38,3 +38,8 @@ sysinfo.txt
 *.unitypackage
 Assets/Textures/Skybox.psd
 Assets/Textures/Skybox.psd.meta
+Assets/Materials/Environment/SkyboxMat.mat
+Assets/Textures/Environment/Skybox.psd
+Assets/Textures/UnityChanTexture/face_00.tga
+Assets/Textures/UnityChanTexture/body_01.tga
+Assets/Textures/UnityChanTexture/hair_01.tga
