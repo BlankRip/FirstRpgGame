@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour
 {
     [Header("Stuff requied to swithch back to Overworld")]
     [SerializeField] GameObject overWorld;
     [SerializeField] GameObject battleArea;
+    [SerializeField] AudioManager manageSounds;
+    [SerializeField] GameObject BattleWonScreen;
 
     [Header("Stuff used in battle area")]
     public bool playerTurn;
@@ -19,6 +22,12 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject playerBattleUI;
     public Slider playerHealthBar;
     public Slider enemyHealthBar;
+
+    [Header("For Game over")]
+    [SerializeField] Animator animate;
+    [SerializeField] GameObject gameOverScreen;
+
+
 
 
     // Start is called before the first frame update
@@ -47,9 +56,9 @@ public class BattleManager : MonoBehaviour
     {
         if(currentBattler.enemyHealth <= 0)
         {
+            manageSounds.VictorySound();
             Destroy(currentBattler.gameObject);
-            overWorld.SetActive(true);
-            battleArea.SetActive(false);
+            BattleWonScreen.SetActive(true);
         }
     }
 
@@ -57,7 +66,21 @@ public class BattleManager : MonoBehaviour
     {
         if(playerHealth <= 0)
         {
-            print("Here game over screen will happen");
+            manageSounds.DeathSound();
+            animate.SetBool("Died", true);
+            gameOverScreen.SetActive(true);
         }
+    }
+
+    public void BackToWorld()
+    {
+        BattleWonScreen.SetActive(false);
+        overWorld.SetActive(true);
+        battleArea.SetActive(false);
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

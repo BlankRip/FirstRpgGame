@@ -6,6 +6,7 @@ public class PlayerBattler : MonoBehaviour
 {
     BattleManager manager;
     [SerializeField] Animator animate;
+    [SerializeField] AudioManager manageSound;
     [SerializeField] float attackDamageNormal;
     float attackDamageCritical;
     [SerializeField] int specialDamageNormal;
@@ -23,6 +24,7 @@ public class PlayerBattler : MonoBehaviour
 
     public void Attack()
     {
+        manageSound.AttackSound();
         animate.SetBool("Attacking", true);
         hitChance = Random.Range(0, 10);
         if (hitChance < 7)
@@ -44,6 +46,7 @@ public class PlayerBattler : MonoBehaviour
     }
     public void SpecialAttack()
     {
+        manageSound.SpecialSound();
         animate.SetBool("Special", true);
         hitChance = Random.Range(0, 10);
         if (hitChance <= 8 && hitChance >= 2)
@@ -65,6 +68,7 @@ public class PlayerBattler : MonoBehaviour
     }
     public void Defence()
     {
+        manageSound.DefenceSound();
         animate.SetBool("Defending", true);
         manager.playerProtectionOn = true;
         manager.turnesProtected = 2;
