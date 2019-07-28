@@ -9,8 +9,8 @@ public class BattleManager : MonoBehaviour
     [Header("Stuff requied to swithch back to Overworld")]
     [SerializeField] GameObject overWorld;
     [SerializeField] GameObject battleArea;
-    [SerializeField] AudioManager manageSounds;
     [SerializeField] GameObject BattleWonScreen;
+    AudioManager manageSounds;
 
     [Header("Stuff used in battle area")]
     public bool playerTurn;
@@ -35,7 +35,9 @@ public class BattleManager : MonoBehaviour
     {
         playerTurn = true;
         enemyTurn = false;
+        playerProtectionOn = false;
         currentBattler = FindObjectOfType<EnemyBattler>();
+        manageSounds = GetComponent<AudioManager>();
         playerHealth = 100;
         playerHealthBar.maxValue = playerHealth;
         playerHealthBar.value = playerHealth;

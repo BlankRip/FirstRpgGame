@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip attackClip;
     [SerializeField] AudioClip specialClip;
     [SerializeField] AudioClip defenceClip;
+    [SerializeField] AudioClip protectedClip;
     [SerializeField] AudioClip victoryClip;
     [SerializeField] AudioClip deathClip;
     
@@ -27,6 +28,11 @@ public class AudioManager : MonoBehaviour
     public void DefenceSound()
     {
         audioSource.PlayOneShot(defenceClip);
+    }
+
+    public void ProtectedSound()
+    {
+        audioSource.PlayOneShot(protectedClip);
     }
 
     public void VictorySound()

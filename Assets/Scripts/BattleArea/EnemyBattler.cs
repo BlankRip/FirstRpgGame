@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyBattler : MonoBehaviour
 {
     BattleManager manager;
+    AudioManager manageSounds;
     public int enemyHealth;
     [SerializeField] float attackDamage;
     float attackDamageCritical;
@@ -13,6 +14,7 @@ public class EnemyBattler : MonoBehaviour
     private void Start()
     {
         manager = FindObjectOfType<BattleManager>();
+        manageSounds = FindObjectOfType<AudioManager>();
         attackDamageCritical = attackDamage + attackDamage * 0.25f;
     }
 
@@ -41,6 +43,7 @@ public class EnemyBattler : MonoBehaviour
 
             }
             else
+                manageSounds.ProtectedSound();
                 print("Protected");
 
             if (manager.turnesProtected > 0)
