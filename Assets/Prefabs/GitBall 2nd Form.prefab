@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9038624920663281971}
   - component: {fileID: 9038624920663281969}
   - component: {fileID: 1458398560244222031}
+  - component: {fileID: 3193475794390835097}
   m_Layer: 0
   m_Name: GitBall 2nd Form
   m_TagString: Untagged
@@ -122,4 +123,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: 125
+  attackAnimations: {fileID: 3193475794390835097}
   attackDamage: 9
+  specialDamage: 15
+  firstForm: 0
+  secondForm: 1
+  finalForm: 0
+--- !u!95 &3193475794390835097
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9038624920663281964}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e72adaec5e2506244b04fe78e918f56f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

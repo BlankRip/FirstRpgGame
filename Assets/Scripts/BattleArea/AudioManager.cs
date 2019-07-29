@@ -14,6 +14,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip protectedClip;
     [SerializeField] AudioClip victoryClip;
     [SerializeField] AudioClip deathClip;
+    [SerializeField] AudioClip enemyAttackClip;
+    [SerializeField] AudioClip form1SpecialClip;
+    [SerializeField] AudioClip form2SpecialClip;
+    [SerializeField] AudioClip finalFormSpecialClip;
     
     public void AttackSound()
     {
@@ -43,5 +47,29 @@ public class AudioManager : MonoBehaviour
     public void DeathSound()
     {
         audioSource.PlayOneShot(deathClip);
+    }
+
+    public void EnemyAttackSound()
+    {
+        audioSource.PlayOneShot(enemyAttackClip);
+        print("<color=pink> entered</color>");
+    }
+
+    public void SpecialOneSound()
+    {
+        audioSource.PlayOneShot(form1SpecialClip);
+        print("<color=red> entered</color>");
+    }
+
+    public void SpecialSecondSound()
+    {
+        audioSource.PlayOneShot(form2SpecialClip);
+        print("<color=red> entered</color>");
+    }
+
+    public void SpecialFinalSound()
+    {
+        audioSource.PlayOneShot(finalFormSpecialClip);
+        print("<color=red> entered</color>");
     }
 }
