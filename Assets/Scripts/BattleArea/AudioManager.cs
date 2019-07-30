@@ -19,6 +19,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip form2SpecialClip;
     [SerializeField] AudioClip finalFormSpecialClip;
     
+
+
+    //Functions to playone shot when called in any other script
     public void AttackSound()
     {
         audioSource.PlayOneShot(attackClip);

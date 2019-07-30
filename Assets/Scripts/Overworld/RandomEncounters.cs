@@ -6,34 +6,40 @@ public class RandomEncounters : MonoBehaviour
 {
     [SerializeField] GameObject theOverWorld;
     [SerializeField] GameObject battleArea;
-    [SerializeField] Transform enemyBattlePosition;
-    [SerializeField] GameObject enemyTypeToSpawn;
+    [SerializeField] GameObject enemyTypeToSpawn;                     // Prefab of the enemy type which is to be spawned
+
+    [SerializeField] Transform enemyBattlePosition;                   // Position the enemy is instanciate in the battle area
     [SerializeField] BattleManager manager;
-    int spawnChance;
-    float gapBtwEncounters = 1.5f;
-    bool recentlyencountered = false;
+
+    int spawnChance;                                                  // A random chance of encountering a enemy
+    float gapBtwEncounters = 1.5f;                                    // once player gets back from a battle the minimum gap before the next ecounter can happen
+    bool recentlyencountered = false;                                 // To check if the player had a recent encounter
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "TallGrass")
+        if(other.tag == "TallGrass")                                 // Checking if colliding with tall grass so that it can there can be random enconters with mini enemies
         {
-            spawnChance = Random.Range(0, 100);
-            if(recentlyencountered)
+            spawnChance = Random.Range(0, 100);                      // Generating a random number between 0 and 99
+
+            // Checking if recently encounterd enmey
+            if (recentlyencountered)                                  
             {
-                if (gapBtwEncounters > 0)
+                if (gapBtwEncounters > 0)                            // getting the gap between encounter timer to do its thing
                     gapBtwEncounters -= Time.deltaTime;
-                else if (gapBtwEncounters <= 0)
+                else if (gapBtwEncounters <= 0)                      //if the timer hits 0 setting the player to be eligibal to more random encounters
                 {
                     gapBtwEncounters = 1.5f;
                     recentlyencountered = false;
                 }
             }
-            if ((spawnChance == 13||spawnChance == 53 || spawnChance == 93) && !recentlyencountered)
+
+            // if the player did not have a recent encounter and if so and the random numbet matches then ther will be an encounter triggered
+            if ((spawnChance == 13||spawnChance == 53 || spawnChance == 93) && !recentlyencountered)  
             {
                 theOverWorld.SetActive(false);
                 battleArea.SetActive(true);
                 Instantiate(enemyTypeToSpawn, enemyBattlePosition.position, enemyBattlePosition.rotation);
-                manager.Start();
+                manager.Start();                                         // Running start functionin the manager which will set up the battle stats
                 recentlyencountered = true;
             }
         }
