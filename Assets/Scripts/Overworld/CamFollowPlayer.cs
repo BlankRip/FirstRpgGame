@@ -8,7 +8,7 @@ public class CamFollowPlayer : MonoBehaviour
 
     //Valuses of the postion of the camera needed to be added to the player postion on start
     [SerializeField] Vector3 camOffSet;
-    [SerializeField] float size = 2;                                       // usually hight of object so that camera views at the head an not the object's feet
+    [SerializeField] float size = 2;                                       // the hight of object so that camera views at the head an not the object's feet
     [HideInInspector] public float currentZoom = 10;                       // The current zoom value
     [HideInInspector] public float zoomSpeed = 4;
     [HideInInspector] public float zoomMin = 5;
@@ -23,7 +23,7 @@ public class CamFollowPlayer : MonoBehaviour
     {
         //To zoom in and out when mouse wheel is scrolled
         currentZoom -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
-        currentZoom = Mathf.Clamp(currentZoom, zoomMin, zoomMax);
+        currentZoom = Mathf.Clamp(currentZoom, zoomMin, zoomMax);                           //Clipping zoom values between a min and max
 
         //To rotate camerara with A & D
         currentRotate -= Input.GetAxis("Horizontal") * rotateSpeed * Time.deltaTime;

@@ -8,17 +8,11 @@ public class AnimationTriggersWorld : MonoBehaviour
     [SerializeField] Animator unityChanMoveAnimations;
     [SerializeField] NavMeshAgent playerNavAgent;
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if (playerNavAgent.remainingDistance > playerNavAgent.stoppingDistance)
+        if (playerNavAgent.remainingDistance > playerNavAgent.stoppingDistance)              //Turn to running state when the player is moving to his destination 
             unityChanMoveAnimations.SetBool("Running", true);
         else
-            unityChanMoveAnimations.SetBool("Running", false);
+            unityChanMoveAnimations.SetBool("Running", false);                               //Changing back to the idle animation state when not moving i.e at destination
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NavigateBtwWaypoints : MonoBehaviour
 {
-    [SerializeField] GameObject player;
+    [SerializeField] GameObject player; 
     [SerializeField] GameObject[] waypoints;
     [SerializeField] float followRange;              //the distence at which  the objet should start chasing the player
     [SerializeField] float speed;                    // speed at whih the enmey moves

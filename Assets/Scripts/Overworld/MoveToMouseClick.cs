@@ -51,7 +51,7 @@ public class MoveToMouseClick : MonoBehaviour
             //Checking if the player is close to the destination
             if (distance > 1)
             {
-                transform.position += direction * speed * Time.deltaTime;
+                transform.position += direction * speed * Time.deltaTime; 
             }
         }
     }

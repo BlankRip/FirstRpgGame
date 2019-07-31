@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 2705554705753595161}
   - component: {fileID: 2705554705753595160}
   - component: {fileID: 2705554705753595163}
-  - component: {fileID: 2705554705753595162}
-  - component: {fileID: 2705554705753595164}
   m_Layer: 0
   m_Name: Git Fnal Dong
   m_TagString: Untagged
@@ -1589,38 +1587,6 @@ MonoBehaviour:
   m_selectedFaces: 
   m_SelectedEdges: []
   m_selectedTriangles: 
---- !u!64 &2705554705753595162
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2705554705753595157}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 0}
---- !u!114 &2705554705753595164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2705554705753595157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c8f67cce2b81834db612bd0b02034d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  theOverWorld: {fileID: 0}
-  battleArea: {fileID: 0}
-  enemyBattlePosition: {fileID: 0}
-  enemyTypeToSpawn: {fileID: 9038624920663281964, guid: 928cc2f361443674cbc5666e1392b9df,
-    type: 3}
-  manager: {fileID: 0}
 --- !u!1 &2705554705815812494
 GameObject:
   m_ObjectHideFlags: 0
@@ -1630,9 +1596,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2705554705815812495}
-  - component: {fileID: 2705554705815812493}
   - component: {fileID: 2705554705815812492}
   - component: {fileID: 3094654514707337148}
+  - component: {fileID: 8750744535207719763}
   m_Layer: 0
   m_Name: Git Final Form
   m_TagString: Untagged
@@ -1657,26 +1623,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 53.578003, z: 0}
---- !u!114 &2705554705815812493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2705554705815812494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3fc1a252c1202e43a2cba0d44c26c35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  followRange: 2.5
-  speed: 2
-  switchWaypointAtDistance: 0.3
 --- !u!54 &2705554705815812492
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1706,7 +1652,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: 175
+  attackAnimations: {fileID: 8750744535207719763}
   attackDamage: 14
+  specialDamage: 20
+  firstForm: 0
+  secondForm: 0
+  finalForm: 1
+--- !u!95 &8750744535207719763
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2705554705815812494}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 30358386e7f8b204081082da5dc65a08, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2705554705876686645
 GameObject:
   m_ObjectHideFlags: 0
@@ -1719,7 +1689,6 @@ GameObject:
   - component: {fileID: 2705554705876686652}
   - component: {fileID: 2705554705876686655}
   - component: {fileID: 2705554705876686654}
-  - component: {fileID: 2705554705876686651}
   m_Layer: 0
   m_Name: GitBall Final1
   m_TagString: Untagged
@@ -1799,24 +1768,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2705554705876686651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2705554705876686645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c8f67cce2b81834db612bd0b02034d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  theOverWorld: {fileID: 0}
-  battleArea: {fileID: 0}
-  enemyBattlePosition: {fileID: 0}
-  enemyTypeToSpawn: {fileID: 9038624920663281964, guid: 928cc2f361443674cbc5666e1392b9df,
-    type: 3}
-  manager: {fileID: 0}
 --- !u!1 &2705554707274986493
 GameObject:
   m_ObjectHideFlags: 0
@@ -1829,7 +1780,6 @@ GameObject:
   - component: {fileID: 2705554707274985990}
   - component: {fileID: 2705554707274985985}
   - component: {fileID: 2705554707274985984}
-  - component: {fileID: 2705554707274985987}
   m_Layer: 0
   m_Name: GitBall Final2
   m_TagString: Untagged
@@ -1909,21 +1859,3 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2705554707274985987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2705554707274986493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c8f67cce2b81834db612bd0b02034d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  theOverWorld: {fileID: 0}
-  battleArea: {fileID: 0}
-  enemyBattlePosition: {fileID: 0}
-  enemyTypeToSpawn: {fileID: 9038624920663281964, guid: 928cc2f361443674cbc5666e1392b9df,
-    type: 3}
-  manager: {fileID: 0}

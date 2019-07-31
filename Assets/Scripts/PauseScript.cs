@@ -11,13 +11,13 @@ public class PauseScript : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(!paused)
+            if(!paused)                                   //Switching on the pause screen and making the game in the background freeze
             {
                 Time.timeScale = 0;
                 pauseScreen.SetActive(true);
                 paused = true;
             }
-            else if(paused)
+            else if(paused)                               //Switching back into the game, resumeing
             {
                 pauseScreen.SetActive(false);
                 Time.timeScale = 1;

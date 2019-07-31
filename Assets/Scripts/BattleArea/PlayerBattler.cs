@@ -4,25 +4,38 @@ using UnityEngine;
 
 public class PlayerBattler : MonoBehaviour
 {
+    //Basics
     BattleManager manager;
+    AudioManager manageSound;
     [SerializeField] Animator animate;
-    [SerializeField] float attackDamageNormal;
-    float attackDamageCritical;
-    [SerializeField] int specialDamageNormal;
-    float specialDamageCritical;
-    int hitChance;
+
+    //Stuff related to attacking
+    [SerializeField] float attackDamageNormal;                      // Amount of damage player will do to enemy when using normal attack
+    [SerializeField] int specialDamageNormal;                       // Amount of damage player will do to enemy when using special attack
+    float attackDamageCritical;                                     // Amount of damage done when the normal attack is a critical hit
+    float specialDamageCritical;                                    // Amount of damage done when the special attack is a critical hit
+    int hitChance;                                                  // A random number generated to decide if the attack should be a critical hit
+    int animationClipLength;                                        // Time taken for animation to complete
 
     private void Start()
     {
         manager = FindObjectOfType<BattleManager>();
-        attackDamageCritical = attackDamageNormal * 1.5f;
-        specialDamageCritical = specialDamageNormal * 1.5f;
+        manageSound = FindObjectOfType<AudioManager>();
+        attackDamageCritical = attackDamageNormal * 1.5f;                  // Setting the value of the critical damage for normal attack
+        specialDamageCritical = specialDamageNormal * 1.5f;                // Setting the value of the critical damage for special attack
         print("settings");
     }
 
+
+    //Attack Function
     public void Attack()
     {
-        //animate.SetBool("Attacking", true);
+        manageSound.AttackSound();                                                               //Play attack soundeffect
+        animate.SetTrigger("Attacking");                                                         //Attack animation
+        manager.playerBattleUI.SetActive(false);                                                 //Turning off player battle options
+        animationClipLength = animate.GetCurrentAnimatorClipInfo(0).Length;                      //Getting time it takes to finish the animation
+        StartCoroutine(SwitchTruns(animationClipLength));                                        //Waiting for animation to complete then switch turns
+
         hitChance = Random.Range(0, 10);
         if (hitChance < 7)
         {
@@ -38,11 +51,18 @@ public class PlayerBattler : MonoBehaviour
             manager.DidEnemyDie();
             print("<color=red> NOW ATTACKING Crit </color>");
         }
-        manager.enemyTurn = true;
-        manager.playerTurn = false;
     }
+
+
+    //Special Attack function
     public void SpecialAttack()
     {
+        manageSound.SpecialSound();                                                              //Play special soundeffect
+        animate.SetTrigger("Special");                                                           //Special animation
+        manager.playerBattleUI.SetActive(false);                                                 //Turning off player battle options
+        animationClipLength = animate.GetCurrentAnimatorClipInfo(0).Length;                      //Getting time it takes to finish the animation
+        StartCoroutine(SwitchTruns(animationClipLength));                                        //Waiting for animation to complete then switch turns
+
         hitChance = Random.Range(0, 10);
         if (hitChance <= 8 && hitChance >= 2)
         {
@@ -58,20 +78,32 @@ public class PlayerBattler : MonoBehaviour
             manager.DidEnemyDie();
             print("<color=cyan> USING SPECIAL ATTACK Crit </color>");
         }
-        manager.enemyTurn = true;
-        manager.playerTurn = false;
     }
+
+
+    //Defence spell function
     public void Defence()
     {
+        manageSound.DefenceSound();                                                              //Play defence spell soundeffect
+        animate.SetTrigger("Defending");                                                         //Defence animation
+        manager.playerBattleUI.SetActive(false);                                                 //Turning off player battle options
+        animationClipLength = animate.GetCurrentAnimatorClipInfo(0).Length;                      //Getting time it takes to finish the animation
+        StartCoroutine(SwitchTruns(animationClipLength));                                        //Waiting for animation to complete then switch turns
+
         manager.playerProtectionOn = true;
         manager.turnesProtected = 2;
         print("<color=green> NOW DEFENDING </color>");
-        manager.enemyTurn = true;
-        manager.playerTurn = false;
     }
 
-    void Update()
+
+    //Function to wait for animation to finish then switch turns
+    IEnumerator SwitchTruns(int waitTime)
     {
-        
+        // Waiting for animation to finish
+        yield return new WaitForSeconds(waitTime + 2);
+
+        //Switching turns
+        manager.enemyTurn = true;
+        manager.playerTurn = false;
     }
 }
