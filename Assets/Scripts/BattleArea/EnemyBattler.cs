@@ -17,6 +17,7 @@ public class EnemyBattler : MonoBehaviour
     float specialDamageCritical;                              // Amount of damage done when the special attack is a critical hit
     int critChance;                                           // A random number generated to decide if the attack should be a critical hit
     int whichAttack;                                          // A random number generated to decide on which attack to use
+    int animationLength;                                        // Time taken for animation to complete
 
     // Choosing enemy type in inspector
     [SerializeField] bool firstForm;
@@ -47,6 +48,8 @@ public class EnemyBattler : MonoBehaviour
                 {
                     //Normal attack animation
                     attackAnimations.SetTrigger("Normal");
+                    animationLength = attackAnimations.GetCurrentAnimatorClipInfo(0).Length;                      //Getting time it takes to finish the animation
+                    StartCoroutine(GoToPlayerTurn(animationLength));                                             //Waiting for animation to complete then switch turns
 
                     //Normal attack sound effect
                     manageSounds.EnemyAttackSound();
@@ -69,6 +72,8 @@ public class EnemyBattler : MonoBehaviour
                 {
                     // Special attack animation
                     attackAnimations.SetTrigger("Special");
+                    animationLength = attackAnimations.GetCurrentAnimatorClipInfo(0).Length;                      //Getting time it takes to finish the animation
+                    StartCoroutine(GoToPlayerTurn(animationLength));                                             //Waiting for animation to complete then switch on player battle options
 
                     //Based on the enemy the sound effect to play for their special attack
                     if (firstForm)
@@ -94,11 +99,15 @@ public class EnemyBattler : MonoBehaviour
                     }
                 }
             }
-            else                                                                     // If player cast proection spell and is till under it's influance
+            else                                                                                           // If player cast proection spell and is till under it's influance
             {
+                attackAnimations.SetTrigger("Normal");                                                        // Just perfom attack and tell player he is protected
+                animationLength = attackAnimations.GetCurrentAnimatorClipInfo(0).Length;                      //Getting time it takes to finish the animation
+                StartCoroutine(GoToPlayerTurn(animationLength));                                              //Waiting for animation to complete then switch on player battle options
+
+                // Protected sound effect
                 manageSounds.ProtectedSound();
                 print("Protected");
-                attackAnimations.SetTrigger("Normal");
             }
 
             // Checkeing if the turn the influance of the protectioin spell will last and setting it's value
@@ -107,9 +116,18 @@ public class EnemyBattler : MonoBehaviour
             if (manager.turnesProtected <= 0)
                 manager.playerProtectionOn = false;
 
-            // Switching turns
+            //Switching turns
             manager.playerTurn = true;
             manager.enemyTurn = false;
         }
+    }
+
+    IEnumerator GoToPlayerTurn(int waitTime)
+    {
+        // Waiting for animation to finish
+        yield return new WaitForSeconds(waitTime + 2);
+
+        // Turn on the player Battle options
+        manager.playerBattleUI.SetActive(true);
     }
 }

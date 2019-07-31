@@ -22,7 +22,7 @@ public class BattleManager : MonoBehaviour
     [HideInInspector] public int playerHealth;                          //Player's health value
     [HideInInspector] public int turnesProtected;                       // The number of turns the protection influance will last for at an instance
     [HideInInspector] public EnemyBattler currentBattler;               // The enemy gameobject
-    [SerializeField] GameObject playerBattleUI;                         //Player's battle options
+    public GameObject playerBattleUI;                                   //Player's battle options
 
     // The health bars for the player and enemy
     public Slider playerHealthBar;
@@ -50,15 +50,15 @@ public class BattleManager : MonoBehaviour
         enemyHealthBar.value = currentBattler.enemyHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // Displaying the battle options if it is the player's turn
-        if (playerTurn)
-            playerBattleUI.SetActive(true);
-        else
-            playerBattleUI.SetActive(false);
-    }
+    //// Update is called once per frame
+    //void Update()
+    //{
+    //    // Displaying the battle options if it is the player's turn
+    //    if (playerTurn)
+    //        playerBattleUI.SetActive(true);
+    //    else
+    //        playerBattleUI.SetActive(false);
+    //}
 
 
     //Function to check if the enemy is dead
@@ -80,6 +80,7 @@ public class BattleManager : MonoBehaviour
         {
             manageSounds.DeathSound();
             animate.SetBool("Died", true);
+            playerBattleUI.SetActive(false);
             gameOverScreen.SetActive(true);                       //Show game-over screen if the player dies
         }
     }
