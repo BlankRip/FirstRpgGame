@@ -7,6 +7,7 @@ public class EnemyBattler : MonoBehaviour
     //Basics
     BattleManager manager;
     AudioManager manageSounds;
+    ParticleManager manageParticles;
     [SerializeField] Animator attackAnimations;
     public int enemyHealth;                                   //The amount of health the enemy will have
 
@@ -28,6 +29,7 @@ public class EnemyBattler : MonoBehaviour
     {
         manager = FindObjectOfType<BattleManager>();
         manageSounds = FindObjectOfType<AudioManager>();
+        manageParticles = FindObjectOfType<ParticleManager>();
         attackDamageCritical = attackDamage + (attackDamage * 0.25f);                  // Setting the value of the critical damage for normal attack
         specialDamageCritical = specialDamage + (specialDamage * 0.3f);                // Setting the value of the critical damage for special attack
     }
@@ -48,6 +50,7 @@ public class EnemyBattler : MonoBehaviour
                 {
                     //Normal attack animation
                     attackAnimations.SetTrigger("Normal");
+                    StartCoroutine(manageParticles.EnemyAttackParticles(2));
                     animationLength = attackAnimations.GetCurrentAnimatorClipInfo(0).Length;                      //Getting time it takes to finish the animation
                     StartCoroutine(GoToPlayerTurn(animationLength));                                             //Waiting for animation to complete then switch turns
 

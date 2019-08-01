@@ -7,6 +7,7 @@ public class PlayerBattler : MonoBehaviour
     //Basics
     BattleManager manager;
     AudioManager manageSound;
+    ParticleManager manageParticles;
     [SerializeField] Animator animate;
 
     //Stuff related to attacking
@@ -21,6 +22,7 @@ public class PlayerBattler : MonoBehaviour
     {
         manager = FindObjectOfType<BattleManager>();
         manageSound = FindObjectOfType<AudioManager>();
+        manageParticles = FindObjectOfType<ParticleManager>();
         attackDamageCritical = attackDamageNormal * 1.5f;                  // Setting the value of the critical damage for normal attack
         specialDamageCritical = specialDamageNormal * 1.5f;                // Setting the value of the critical damage for special attack
         print("settings");
@@ -33,6 +35,7 @@ public class PlayerBattler : MonoBehaviour
         manageSound.AttackSound();                                                               //Play attack soundeffect
         animate.SetTrigger("Attacking");                                                         //Attack animation
         manager.playerBattleUI.SetActive(false);                                                 //Turning off player battle options
+        StartCoroutine(manageParticles.PlayerAttackParticle(2));                                 // Particle effects
         animationClipLength = animate.GetCurrentAnimatorClipInfo(0).Length;                      //Getting time it takes to finish the animation
         StartCoroutine(SwitchTruns(animationClipLength));                                        //Waiting for animation to complete then switch turns
 
@@ -60,6 +63,7 @@ public class PlayerBattler : MonoBehaviour
         manageSound.SpecialSound();                                                              //Play special soundeffect
         animate.SetTrigger("Special");                                                           //Special animation
         manager.playerBattleUI.SetActive(false);                                                 //Turning off player battle options
+        StartCoroutine(manageParticles.PlayerSpecialParticle(1.3f));                                // Particle effects
         animationClipLength = animate.GetCurrentAnimatorClipInfo(0).Length;                      //Getting time it takes to finish the animation
         StartCoroutine(SwitchTruns(animationClipLength));                                        //Waiting for animation to complete then switch turns
 
