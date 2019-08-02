@@ -18,6 +18,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip form1SpecialClip;
     [SerializeField] AudioClip form2SpecialClip;
     [SerializeField] AudioClip finalFormSpecialClip;
+
+    [Header("Stuff required to give fade effect")]
+    [SerializeField] float fadeSpeed;
     
 
 
@@ -74,5 +77,26 @@ public class AudioManager : MonoBehaviour
     {
         audioSource.PlayOneShot(finalFormSpecialClip);
         print("<color=red> entered</color>");
+    }
+
+    public IEnumerator FadeIn(AudioSource source, AudioSource forOut, float maxVolume, float startOutVoulume)
+    {
+        forOut.volume = startOutVoulume;
+        while (forOut.volume > 0)
+        {
+            startOutVoulume -= fadeSpeed;
+            forOut.volume = startOutVoulume;
+            print("out here");
+        }
+
+        float currentVolume = 0;
+        source.volume = currentVolume;
+        while (source.volume < maxVolume)
+        {
+            currentVolume += fadeSpeed;
+            source.volume = currentVolume;
+            print("in here");
+        }
+        yield return new WaitForSeconds(0.3f);
     }
 }

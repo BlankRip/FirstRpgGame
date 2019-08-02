@@ -23,7 +23,6 @@ public class PauseScript : MonoBehaviour
                 Time.timeScale = 1;
                 paused = false;
             }
-
         }
     }
 }

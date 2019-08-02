@@ -10,6 +10,8 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject overWorld;
     [SerializeField] GameObject battleArea;
     [SerializeField] GameObject BattleWonScreen;
+    [SerializeField] AudioSource overWorldSource;                     // Audio source for the audio responsibel in the over-world
+    [SerializeField] AudioSource battleSource;                        // Audio source for the audio responsibel in the battle area
     AudioManager manageSounds;
 
     [Header("Stuff used in battle area")]
@@ -41,6 +43,7 @@ public class BattleManager : MonoBehaviour
         playerTurn = true;
         enemyTurn = false;
         playerProtectionOn = false;
+        playerBattleUI.SetActive(true);
         currentBattler = FindObjectOfType<EnemyBattler>();
         manageSounds = GetComponent<AudioManager>();
         playerHealth = 100;
@@ -50,15 +53,6 @@ public class BattleManager : MonoBehaviour
         enemyHealthBar.value = currentBattler.enemyHealth;
     }
 
-    //// Update is called once per frame
-    //void Update()
-    //{
-    //    // Displaying the battle options if it is the player's turn
-    //    if (playerTurn)
-    //        playerBattleUI.SetActive(true);
-    //    else
-    //        playerBattleUI.SetActive(false);
-    //}
 
 
     //Function to check if the enemy is dead
@@ -90,6 +84,7 @@ public class BattleManager : MonoBehaviour
     public void BackToWorld()
     {
         BattleWonScreen.SetActive(false);
+        StartCoroutine(manageSounds.FadeIn(overWorldSource, battleSource, 0.3f, 0.38f));                //For fade effect
         overWorld.SetActive(true);
         battleArea.SetActive(false);
     }
