@@ -57,26 +57,34 @@ public class PlayerBattler : MonoBehaviour
     //Special Attack function
     public void SpecialAttack()
     {
-        manageSound.SpecialSound();                                                              //Play special soundeffect
-        animate.SetTrigger("Special");                                                           //Special animation
-        manager.playerBattleUI.SetActive(false);                                                 //Turning off player battle options
-        StartCoroutine(manageParticles.PlayerSpecialParticle(1.3f));                                // Particle effects
-        animationClipLength = animate.GetCurrentAnimatorClipInfo(0).Length;                      //Getting time it takes to finish the animation
-        StartCoroutine(SwitchTruns(animationClipLength));                                        //Waiting for animation to complete then switch turns
+        if (manager.playerMana > 0)
+        {
+            manageSound.SpecialSound();                                                              //Play special soundeffect
+            animate.SetTrigger("Special");                                                           //Special animation
+            manager.playerBattleUI.SetActive(false);                                                 //Turning off player battle options
+            StartCoroutine(manageParticles.PlayerSpecialParticle(1.3f));                             // Particle effects
+            animationClipLength = animate.GetCurrentAnimatorClipInfo(0).Length;                      //Getting time it takes to finish the animation
+            StartCoroutine(SwitchTruns(animationClipLength));                                        //Waiting for animation to complete then switch turns
 
-        hitChance = Random.Range(0, 10);
-        if (hitChance <= 8 && hitChance >= 2)
-        {
-            manager.currentBattler.enemyHealth -= (int)specialDamageNormal;
-            manager.enemyHealthBar.value = manager.currentBattler.enemyHealth;
-            manager.DidEnemyDie();
+            hitChance = Random.Range(0, 10);
+            if (hitChance <= 8 && hitChance >= 2)
+            {
+                manager.currentBattler.enemyHealth -= (int)specialDamageNormal;
+                manager.enemyHealthBar.value = manager.currentBattler.enemyHealth;
+                manager.DidEnemyDie();
+            }
+            else if (hitChance < 2 || hitChance == 9)
+            {
+                manager.currentBattler.enemyHealth -= (int)specialDamageCritical;
+                manager.enemyHealthBar.value = manager.currentBattler.enemyHealth;
+                manager.DidEnemyDie();
+            }
+
+            manager.playerMana -= 35;
+            manager.playerManaBar.value = manager.playerMana;
         }
-        else if (hitChance < 2 || hitChance == 9)
-        {
-            manager.currentBattler.enemyHealth -= (int)specialDamageCritical;
-            manager.enemyHealthBar.value = manager.currentBattler.enemyHealth;
-            manager.DidEnemyDie();
-        }
+        else
+            manageSound.NeedManaSound();
     }
 
 
