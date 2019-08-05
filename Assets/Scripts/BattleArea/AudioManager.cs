@@ -58,25 +58,21 @@ public class AudioManager : MonoBehaviour
     public void EnemyAttackSound()
     {
         audioSource.PlayOneShot(enemyAttackClip);
-        print("<color=pink> entered</color>");
     }
 
     public void SpecialOneSound()
     {
         audioSource.PlayOneShot(form1SpecialClip);
-        print("<color=red> entered</color>");
     }
 
     public void SpecialSecondSound()
     {
         audioSource.PlayOneShot(form2SpecialClip);
-        print("<color=red> entered</color>");
     }
 
     public void SpecialFinalSound()
     {
         audioSource.PlayOneShot(finalFormSpecialClip);
-        print("<color=red> entered</color>");
     }
 
     public IEnumerator FadeIn(AudioSource source, AudioSource forOut, float maxVolume, float startOutVoulume)

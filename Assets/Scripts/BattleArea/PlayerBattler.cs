@@ -25,7 +25,6 @@ public class PlayerBattler : MonoBehaviour
         manageParticles = FindObjectOfType<ParticleManager>();
         attackDamageCritical = attackDamageNormal * 1.5f;                  // Setting the value of the critical damage for normal attack
         specialDamageCritical = specialDamageNormal * 1.5f;                // Setting the value of the critical damage for special attack
-        print("settings");
     }
 
 
@@ -45,14 +44,12 @@ public class PlayerBattler : MonoBehaviour
             manager.currentBattler.enemyHealth -= (int)attackDamageNormal;
             manager.enemyHealthBar.value = manager.currentBattler.enemyHealth;
             manager.DidEnemyDie();
-            print("<color=red> NOW ATTACKING </color>");
         }
         else if(hitChance >= 7)
         {
             manager.currentBattler.enemyHealth -= (int)attackDamageCritical;
             manager.enemyHealthBar.value = manager.currentBattler.enemyHealth;
             manager.DidEnemyDie();
-            print("<color=red> NOW ATTACKING Crit </color>");
         }
     }
 
@@ -73,14 +70,12 @@ public class PlayerBattler : MonoBehaviour
             manager.currentBattler.enemyHealth -= (int)specialDamageNormal;
             manager.enemyHealthBar.value = manager.currentBattler.enemyHealth;
             manager.DidEnemyDie();
-            print("<color=cyan> USING SPECIAL ATTACK </color>");
         }
         else if (hitChance < 2 || hitChance == 9)
         {
             manager.currentBattler.enemyHealth -= (int)specialDamageCritical;
             manager.enemyHealthBar.value = manager.currentBattler.enemyHealth;
             manager.DidEnemyDie();
-            print("<color=cyan> USING SPECIAL ATTACK Crit </color>");
         }
     }
 
@@ -96,7 +91,6 @@ public class PlayerBattler : MonoBehaviour
 
         manager.playerProtectionOn = true;
         manager.turnesProtected = 2;
-        print("<color=green> NOW DEFENDING </color>");
     }
 
 

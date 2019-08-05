@@ -61,14 +61,12 @@ public class EnemyBattler : MonoBehaviour
                         manager.playerHealth -= (int)attackDamageCritical;
                         manager.playerHealthBar.value = manager.playerHealth;
                         manager.DidPlayerDie();
-                        print("<color=blue> my trun crit</color>");
                     }
                     else
                     {
                         manager.playerHealth -= (int)attackDamage;
                         manager.playerHealthBar.value = manager.playerHealth;
                         manager.DidPlayerDie();
-                        print("<color=blue> my trun</color>");
                     }
                 }
                 else                                                                            //Perform special attack
@@ -91,14 +89,12 @@ public class EnemyBattler : MonoBehaviour
                         manager.playerHealth -= (int)specialDamageCritical;
                         manager.playerHealthBar.value = manager.playerHealth;
                         manager.DidPlayerDie();
-                        print("<color=blue> my trun crit spe</color>");
                     }
                     else
                     {
                         manager.playerHealth -= (int)specialDamage;
                         manager.playerHealthBar.value = manager.playerHealth;
                         manager.DidPlayerDie();
-                        print("<color=blue> my trun spe</color>");
                     }
                 }
             }
@@ -110,7 +106,6 @@ public class EnemyBattler : MonoBehaviour
 
                 // Protected sound effect
                 manageSounds.ProtectedSound();
-                print("Protected");
             }
 
             // Checkeing if the turn the influance of the protectioin spell will last and setting it's value
