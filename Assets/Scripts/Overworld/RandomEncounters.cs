@@ -9,14 +9,19 @@ public class RandomEncounters : MonoBehaviour
     [SerializeField] GameObject enemyTypeToSpawn;                     // Prefab of the enemy type which is to be spawned
 
     [SerializeField] Transform enemyBattlePosition;                   // Position the enemy is instanciate in the battle area
-    [SerializeField] AudioSource overWorldSource;                     // Audio source for the audio responsibel in the over-world
-    [SerializeField] AudioSource battleSource;                        // Audio source for the audio responsibel in the battle area
     [SerializeField] BattleManager manager;
-    [SerializeField] AudioManager manageSound;
+    AudioManager manageSound;
 
     int spawnChance;                                                  // A random chance of encountering a enemy
-    float gapBtwEncounters = 4;                                    // once player gets back from a battle the minimum gap before the next ecounter can happen
+    float gapBtwEncounters = 9;                                       // once player gets back from a battle the minimum gap before the next ecounter can happen
     bool recentlyencountered = false;                                 // To check if the player had a recent encounter
+
+
+    private void Start()
+    {
+        manageSound = FindObjectOfType<AudioManager>();
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -31,16 +36,15 @@ public class RandomEncounters : MonoBehaviour
                     gapBtwEncounters -= Time.deltaTime;
                 else if (gapBtwEncounters <= 0)                      //if the timer hits 0 setting the player to be eligibal to more random encounters
                 {
-                    gapBtwEncounters = 4;
+                    gapBtwEncounters = 9;
                     recentlyencountered = false;
-                    print("<color=red> can now encounter</color>");
                 }
             }
 
             // if the player did not have a recent encounter and if so and the random numbet matches then ther will be an encounter triggered
             if ((spawnChance == 13||spawnChance == 53 || spawnChance == 93) && !recentlyencountered)  
             {
-                StartCoroutine(manageSound.FadeIn(battleSource, overWorldSource, 0.38f, 0.3f));                //For fade effect
+                manageSound.fadeToBattle = true;                         //For fade effect
                 theOverWorld.SetActive(false);
                 battleArea.SetActive(true);
                 Instantiate(enemyTypeToSpawn, enemyBattlePosition.position, enemyBattlePosition.rotation);

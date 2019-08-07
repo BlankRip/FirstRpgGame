@@ -10,8 +10,6 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject overWorld;
     [SerializeField] GameObject battleArea;
     [SerializeField] GameObject BattleWonScreen;
-    [SerializeField] AudioSource overWorldSource;                     // Audio source for the audio responsibel in the over-world
-    [SerializeField] AudioSource battleSource;                        // Audio source for the audio responsibel in the battle area
     AudioManager manageSounds;
 
     [Header("Stuff used in battle area")]
@@ -47,8 +45,8 @@ public class BattleManager : MonoBehaviour
         playerProtectionOn = false;
         playerBattleUI.SetActive(true);
         currentBattler = FindObjectOfType<EnemyBattler>();
-        manageSounds = GetComponent<AudioManager>();
-        playerHealth = 1;
+        manageSounds = FindObjectOfType<AudioManager>();
+        playerHealth = 100;
         playerHealthBar.maxValue = playerHealth;
         playerHealthBar.value = playerHealth;
         playerMana = 100;
@@ -87,7 +85,7 @@ public class BattleManager : MonoBehaviour
     public void BackToWorld()
     {
         BattleWonScreen.SetActive(false);
-        StartCoroutine(manageSounds.FadeIn(overWorldSource, battleSource, 0.3f, 0.38f));                //For fade effect
+        manageSounds.fadeToWorld = true;                //For fade effect
         overWorld.SetActive(true);
         battleArea.SetActive(false);
     }
