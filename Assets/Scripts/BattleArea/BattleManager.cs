@@ -20,6 +20,7 @@ public class BattleManager : MonoBehaviour
     //UI and stuff in battle
     [HideInInspector] public bool playerProtectionOn;                   //If the player is under the influance of the defence spell
     [HideInInspector] public int playerHealth;                          //Player's health value
+    [HideInInspector] public int playerMana;
     [HideInInspector] public int turnesProtected;                       // The number of turns the protection influance will last for at an instance
     [HideInInspector] public EnemyBattler currentBattler;               // The enemy gameobject
     public GameObject playerBattleUI;                                   //Player's battle options
@@ -27,6 +28,7 @@ public class BattleManager : MonoBehaviour
     // The health bars for the player and enemy
     public Slider playerHealthBar;
     public Slider enemyHealthBar;
+    public Slider playerManaBar;
 
     [Header("For Game over")]
     [SerializeField] Animator animate;
@@ -41,24 +43,19 @@ public class BattleManager : MonoBehaviour
         playerTurn = true;
         enemyTurn = false;
         playerProtectionOn = false;
+        playerBattleUI.SetActive(true);
         currentBattler = FindObjectOfType<EnemyBattler>();
-        manageSounds = GetComponent<AudioManager>();
+        manageSounds = FindObjectOfType<AudioManager>();
         playerHealth = 100;
         playerHealthBar.maxValue = playerHealth;
         playerHealthBar.value = playerHealth;
+        playerMana = 100;
+        playerManaBar.maxValue = playerMana;
+        playerManaBar.value = playerMana;
         enemyHealthBar.maxValue = currentBattler.enemyHealth;
         enemyHealthBar.value = currentBattler.enemyHealth;
     }
 
-    //// Update is called once per frame
-    //void Update()
-    //{
-    //    // Displaying the battle options if it is the player's turn
-    //    if (playerTurn)
-    //        playerBattleUI.SetActive(true);
-    //    else
-    //        playerBattleUI.SetActive(false);
-    //}
 
 
     //Function to check if the enemy is dead
@@ -78,10 +75,8 @@ public class BattleManager : MonoBehaviour
     {
         if(playerHealth <= 0)
         {
-            manageSounds.DeathSound();
-            animate.SetBool("Died", true);
-            playerBattleUI.SetActive(false);
-            gameOverScreen.SetActive(true);                       //Show game-over screen if the player dies
+            animate.SetTrigger("Died");
+            StartCoroutine(GameOver());
         }
     }
 
@@ -90,10 +85,23 @@ public class BattleManager : MonoBehaviour
     public void BackToWorld()
     {
         BattleWonScreen.SetActive(false);
+        manageSounds.fadeToWorld = true;                //For fade effect
         overWorld.SetActive(true);
         battleArea.SetActive(false);
     }
 
+
+    //Function to do game over screen after dead animation
+    IEnumerator GameOver()
+    {
+        yield return new WaitForSeconds(1);
+        manageSounds.DeathSound();
+
+        yield return new WaitForSeconds(1);
+        print("here");
+        playerBattleUI.SetActive(false);
+        gameOverScreen.SetActive(true);                       //Show game-over screen if the player dies
+    }
 
     //Function to load maenu screen when it is game-over
     public void BackToMenu()

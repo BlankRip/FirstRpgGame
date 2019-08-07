@@ -10,12 +10,18 @@ public class BattleTrigger : MonoBehaviour
 
     [SerializeField] Transform enemyBattlePosition;                   // Position the enemy is instanciate in the battle area
     [SerializeField] BattleManager manager;
+    AudioManager manageSound;
 
+    private void Start()
+    {
+        manageSound = FindObjectOfType<AudioManager>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")                                    // Checking if player collied with enemy then moving to battle area and spawnin enemy
         {
+            manageSound.fadeToBattle = true;                         //For fade effect
             theOverWorld.SetActive(false);
             battleArea.SetActive(true);
             Instantiate(enemyTypeToSpawn, enemyBattlePosition.position, enemyBattlePosition.rotation);

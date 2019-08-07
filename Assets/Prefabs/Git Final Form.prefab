@@ -1651,10 +1651,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dde8ad8c0be8054db6fda22a6fde95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 175
   attackAnimations: {fileID: 8750744535207719763}
-  attackDamage: 14
-  specialDamage: 20
+  enemyHealth: 175
+  attackDamage: 16
+  specialDamage: 22
   firstForm: 0
   secondForm: 0
   finalForm: 1

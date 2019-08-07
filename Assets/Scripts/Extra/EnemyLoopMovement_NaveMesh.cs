@@ -50,7 +50,6 @@ public class EnemyLoopMovement_NaveMesh : MonoBehaviour
         else if(changeTarget)
         {
             agent.SetDestination(startPoint.position);
-            print("<color=red>targetStart</color>");
         }
     }
 }
