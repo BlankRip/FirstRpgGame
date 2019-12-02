@@ -1141,7 +1141,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Click on the plan to move.\n\nClick on battle options to \nbattle.\n\nSpecial
+  m_Text: "Click on the plane to move.\n\nClick on battle options to \nbattle.\n\nSpecial
     Attack costs mana."
 --- !u!222 &1937642713
 CanvasRenderer:
